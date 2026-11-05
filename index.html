@@ -1,0 +1,1113 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Next Salah — Parbhani Masjid Namaz Timings</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Cinzel & Syne (Stylish Brand), Inter (UI) & JetBrains Mono (Crisp Timings) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Syne', 'sans-serif'],
+            stylish: ['Cinzel', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              green: '#059669',      // Emerald 600
+              darkGreen: '#064e3b',  // Emerald 900
+              lightGreen: '#ecfdf5', // Emerald 50
+              accent: '#10b981',     // Emerald 500
+              black: '#09090b',      // Zinc 950
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #f8fafc;
+      color: #09090b;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* Custom subtle scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #059669;
+    }
+    /* Hide scrollbar for quick area pills on mobile */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    /* Red Ongoing Card Pulse */
+    @keyframes ongoing-red-glow {
+      0%, 100% {
+        box-shadow: 0 10px 25px -5px rgba(220, 38, 38, 0.22), 0 0 0 2px #dc2626;
+      }
+      50% {
+        box-shadow: 0 10px 30px -5px rgba(220, 38, 38, 0.4), 0 0 0 3px #ef4444;
+      }
+    }
+    .ongoing-card-highlight {
+      animation: ongoing-red-glow 2s infinite ease-in-out;
+    }
+    .brand-title-gradient {
+      background: linear-gradient(135deg, #ffffff 0%, #a7f3d0 55%, #10b981 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-emerald-600 selection:text-white">
+
+  <!-- ===================================================================== -->
+  <!-- UNIFIED MAIN HEADER (STYLISH BRAND + AREA DROPDOWN + CLOCK)           -->
+  <!-- ===================================================================== -->
+  <header class="sticky top-0 z-40 bg-zinc-950 text-white border-b-2 border-emerald-600 shadow-lg">
+    <!-- Top Subtle Disclaimer Strip inside Header -->
+    <div class="bg-black/60 border-b border-zinc-800/80 px-4 py-1.5 text-[11px] text-zinc-400">
+      <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-2">
+        <div class="flex items-center gap-2">
+          <span class="bg-emerald-600 text-white font-extrabold uppercase px-1.5 py-0.5 rounded text-[9px] tracking-wider">
+            Disclaimer
+          </span>
+          <span>Manually updated for Parbhani Masjids. Timings may have minor human errors.</span>
+        </div>
+        <button 
+          onclick="openSuggestModal()" 
+          class="text-emerald-400 hover:text-emerald-300 font-bold underline underline-offset-2 cursor-pointer"
+        >
+          Suggest an Edit &rarr;
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Navigation & Controls Bar -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3.5 sm:py-4">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-3.5">
+        
+        <!-- STYLISH APP NAME & LOGO -->
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-emerald-950/90 border-2 border-emerald-500 flex items-center justify-center shrink-0 shadow-md shadow-emerald-950/50">
+              <svg class="w-6 h-6 sm:w-7 sm:h-7 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c-3.5 3.5-6 6.5-6 10a6 6 0 1012 0c0-3.5-2.5-6.5-6-10z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v1M4 20h16M7 20v-3m10 3v-3" />
+                <circle cx="12" cy="13" r="2" fill="currentColor" />
+              </svg>
+            </div>
+            <div>
+              <div class="flex items-center gap-2.5">
+                <h1 class="font-stylish text-2xl sm:text-3xl font-black tracking-wider brand-title-gradient leading-none">
+                  NEXT SALAH
+                </h1>
+                <span class="text-[10px] font-extrabold uppercase tracking-widest bg-emerald-600/20 text-emerald-300 border border-emerald-500/40 px-2 py-0.5 rounded-full">
+                  Parbhani
+                </span>
+              </div>
+              <p class="text-[11px] sm:text-xs text-zinc-400 mt-1 font-medium">
+                Never miss your Masjid Jama'at
+              </p>
+            </div>
+          </div>
+
+          <!-- Mobile Compact Clock -->
+          <div class="flex md:hidden flex-col items-end bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-1.5">
+            <div id="liveClockMobile" class="font-mono text-sm font-extrabold text-white">--:--</div>
+            <div id="liveDayBadgeMobile" class="text-[10px] font-bold text-emerald-400">Today</div>
+          </div>
+        </div>
+
+        <!-- HEADER CONTROLS: AREA DROPDOWN + DESKTOP CLOCK -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3">
+          
+          <!-- Area Selector Dropdown inside Header -->
+          <div class="flex items-center bg-zinc-900 border-2 border-emerald-500/80 rounded-xl px-3 py-1.5 sm:py-2 focus-within:ring-2 focus-within:ring-emerald-400">
+            <div class="flex items-center gap-1.5 pr-2.5 border-r border-zinc-700 text-emerald-400 shrink-0">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+              <label for="areaSelect" class="text-[11px] font-bold uppercase tracking-wider text-zinc-300">
+                Area
+              </label>
+            </div>
+            <div class="relative flex-grow sm:w-52">
+              <select 
+                id="areaSelect" 
+                onchange="handleAreaChange(this.value)"
+                class="w-full appearance-none bg-transparent text-white font-bold text-xs sm:text-sm pl-2.5 pr-7 focus:outline-none cursor-pointer"
+              >
+                <!-- Populated dynamically -->
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-1 text-emerald-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Desktop Live Clock -->
+          <div class="hidden md:flex items-center gap-3 bg-zinc-900 border border-zinc-800 rounded-xl px-3.5 py-1.5 shrink-0">
+            <div>
+              <div class="text-[10px] uppercase tracking-wider text-zinc-400 font-semibold">Current Time</div>
+              <div id="liveClock" class="font-mono text-base font-extrabold text-white tracking-tight">
+                --:-- --
+              </div>
+            </div>
+            <div class="h-6 w-px bg-zinc-800"></div>
+            <div class="text-right">
+              <div id="liveDayBadge" class="text-xs font-bold text-emerald-400">
+                Loading...
+              </div>
+              <div class="text-[10px] text-zinc-500">Parbhani</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- MAIN CONTENT: STARTS WITH ONGOING SALAH ONLY + EXPAND REMAINING       -->
+  <!-- ===================================================================== -->
+  <main class="flex-grow w-full max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+
+    <!-- 1. ONGOING SALAH SPOTLIGHT SECTION (FIRST THING ON SCREEN) -->
+    <section id="ongoingSectionContainer" class="mb-6">
+      <!-- Dynamically populated with ONLY the ongoing Salah card (or a clean notice if none is ongoing right now) -->
+    </section>
+
+    <!-- 2. TOGGLE BUTTON TO SEE ALL REMAINING SALAH -->
+    <section class="mb-6">
+      <div class="bg-white border-2 border-zinc-900 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+            <h2 id="remainingSectionTitle" class="text-base sm:text-lg font-extrabold text-zinc-950">
+              Remaining Salah in Your Area
+            </h2>
+          </div>
+          <p id="remainingSectionSubtitle" class="text-xs sm:text-sm text-zinc-600 mt-0.5">
+            View the full schedule of other Namaz timings for this area
+          </p>
+        </div>
+
+        <button 
+          id="toggleRemainingBtn"
+          type="button"
+          onclick="toggleRemainingSalah()"
+          class="w-full sm:w-auto justify-center shrink-0 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs sm:text-sm px-5 py-3 rounded-xl border-2 border-zinc-950 shadow-sm transition-all flex items-center gap-2 cursor-pointer"
+        >
+          <span id="toggleRemainingBtnText">See All Remaining Salah</span>
+          <svg id="toggleRemainingIcon" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- 3. REMAINING SALAH CARDS CONTAINER (HIDDEN UNTIL REQUESTED) -->
+    <section id="salahCardsContainer" class="space-y-5 hidden">
+      <!-- Dynamically populated by JavaScript -->
+    </section>
+
+    <!-- SUGGEST AN EDIT CARD -->
+    <section class="mt-8">
+      <div class="bg-zinc-950 text-white border-2 border-zinc-900 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <h3 class="text-base font-extrabold text-white">Has a Masjid changed its Namaz time?</h3>
+          <p class="text-xs sm:text-sm text-zinc-400 mt-0.5">
+            Let us know so we can update it and help others catch their Jama'at on time.
+          </p>
+        </div>
+        <button 
+          onclick="openSuggestModal()"
+          class="w-full sm:w-auto justify-center shrink-0 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-colors flex items-center gap-2"
+        >
+          <span>Suggest an Edit</span>
+          <span>&rarr;</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- SIMPLE TEST BAR (To preview how the Red Ongoing box looks) -->
+    <section class="mt-6">
+      <details class="bg-white border border-zinc-300 rounded-xl p-3.5 text-xs text-zinc-600">
+        <summary class="cursor-pointer font-bold text-zinc-800 select-none flex items-center justify-between">
+          <span>Preview Different Times (Test Ongoing Red Highlight &amp; Friday Jumu'ah)</span>
+          <span class="text-emerald-700 font-semibold underline">Open</span>
+        </summary>
+        <div class="mt-3 pt-3 border-t border-zinc-200 flex flex-wrap items-center gap-2.5">
+          <button type="button" onclick="quickSimulate('05:40', false)" class="px-3 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 font-bold cursor-pointer">
+            Preview Fajr Ongoing (5:40 AM)
+          </button>
+          <button type="button" onclick="quickSimulate('13:40', false)" class="px-3 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 font-bold cursor-pointer">
+            Preview Zuhr Ongoing (1:40 PM)
+          </button>
+          <button type="button" onclick="quickSimulate('13:35', true)" class="px-3 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 font-bold cursor-pointer">
+            Preview Friday Jumu'ah (1:35 PM)
+          </button>
+          <button type="button" onclick="quickSimulate('15:00', false)" class="px-3 py-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-800 border border-zinc-300 font-semibold cursor-pointer">
+            Preview No Ongoing Salah (3:00 PM)
+          </button>
+          <button 
+            onclick="resetSimulation()" 
+            class="ml-auto bg-zinc-900 text-white px-3 py-1.5 rounded-lg font-semibold hover:bg-zinc-800 cursor-pointer"
+          >
+            Back to Real Time
+          </button>
+        </div>
+      </details>
+    </section>
+
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- FOOTER                                                                -->
+  <!-- ===================================================================== -->
+  <footer class="border-t border-zinc-200 bg-white py-5 px-4 text-center text-xs text-zinc-500 mt-8">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <p class="font-stylish font-extrabold text-zinc-950 text-sm tracking-wider">NEXT <span class="text-emerald-600">SALAH</span> &mdash; PARBHANI</p>
+      <p class="text-zinc-500">Made to help our community never miss Jama'at at the Masjid</p>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- SUGGEST AN EDIT MODAL                                                 -->
+  <!-- ===================================================================== -->
+  <div 
+    id="suggestModal" 
+    class="fixed inset-0 bg-zinc-950/70 backdrop-blur-xs z-50 hidden items-center justify-center p-4"
+    onclick="if(event.target === this) closeSuggestModal()"
+  >
+    <div class="bg-white border-2 border-zinc-900 rounded-2xl max-w-md w-full p-6 shadow-2xl">
+      <div class="flex items-start justify-between gap-4 border-b border-zinc-200 pb-4">
+        <div>
+          <span class="text-[10px] font-mono uppercase tracking-widest bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">Community Update</span>
+          <h2 class="text-xl font-extrabold text-zinc-950 mt-1">Suggest a Timing Edit</h2>
+          <p class="text-xs text-zinc-600 mt-0.5">Send a correction for any Masjid in Parbhani</p>
+        </div>
+        <button onclick="closeSuggestModal()" class="text-zinc-400 hover:text-zinc-900 p-1 rounded-lg" aria-label="Close modal">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <form onsubmit="submitEditSuggestion(event)" class="mt-4 space-y-4 text-sm">
+        <div>
+          <label class="block text-xs font-bold uppercase text-zinc-900 mb-1">Masjid Name</label>
+          <input 
+            type="text" 
+            id="editMasjidName" 
+            required 
+            placeholder="e.g., Masjid-e-Mumtaz"
+            class="w-full border-2 border-zinc-300 rounded-xl px-3.5 py-2 text-zinc-950 font-medium focus:outline-none focus:border-emerald-600"
+          />
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase text-zinc-900 mb-1">Area Name</label>
+          <input 
+            type="text" 
+            id="editAreaName" 
+            required 
+            placeholder="e.g., Mumtaz Nagar"
+            class="w-full border-2 border-zinc-300 rounded-xl px-3.5 py-2 text-zinc-950 font-medium focus:outline-none focus:border-emerald-600"
+          />
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase text-zinc-900 mb-1">Updated Prayer &amp; Jama'at Time</label>
+          <textarea 
+            id="editDetails" 
+            rows="3" 
+            required 
+            placeholder="e.g., Isha Jama'at changed from 8:30 PM to 8:45 PM"
+            class="w-full border-2 border-zinc-300 rounded-xl px-3.5 py-2 text-zinc-950 font-medium focus:outline-none focus:border-emerald-600"
+          ></textarea>
+        </div>
+        <div class="pt-2 flex items-center justify-end gap-2.5">
+          <button 
+            type="button" 
+            onclick="closeSuggestModal()" 
+            class="px-4 py-2.5 rounded-xl border border-zinc-300 text-zinc-700 font-semibold hover:bg-zinc-100"
+          >
+            Cancel
+          </button>
+          <button 
+            type="submit" 
+            class="px-5 py-2.5 rounded-xl bg-emerald-600 text-white font-bold hover:bg-emerald-500 shadow-sm"
+          >
+            Send via Email
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- APPLICATION DATA & SMART AUTO-NAMAZ ENGINE                            -->
+  <!-- ===================================================================== -->
+  <script>
+    /**
+     * ========================================================================
+     * 1. ADMIN CONFIGURATION (EDIT THIS SECTION TO UPDATE TIMES ON GITHUB)
+     * ========================================================================
+     */
+    const ADMIN_CONFIG = {
+      // Email for "Suggest an Edit"
+      contactEmail: "admin@nextsalah-parbhani.com",
+
+      // Single Maghrib Jama'at time for all Masjids in Parbhani (24-Hour Format)
+      maghribTime24: "18:08",
+      maghribLastUpdated: "04 Nov 2026",
+      maghribNote: "Maghrib Jama'at happens at the exact same time in all Masjids right after Azan. If you miss it at your Masjid, you cannot catch it at another Masjid and will have to pray alone.",
+
+      // How many minutes BEFORE the earliest Masjid Jama'at should a Salah card
+      // be triggered as "ONGOING" (Red indicator & brought to the top of the screen)?
+      leadMinutesBeforeFirstJamaat: 20,
+
+      // How many minutes AFTER a Masjid's Jama'at start time is that specific
+      // Jama'at considered actively running before marking it as "Done"?
+      jamaatDurationMinutes: 10
+    };
+
+    /**
+     * ========================================================================
+     * 2. PARBHANI MASJID DATABASE (ADD OR UPDATE MASJIDS HERE)
+     * ========================================================================
+     */
+    const MASJID_DATA = [
+      // ---------------- AREA: MUMTAZ NAGAR ----------------
+      {
+        id: "m1",
+        name: "Mohammadi Masjid",
+        area: "Mumtaz Nagar",
+        lastUpdated: "02 Nov 2026",
+        times: {
+          fajr: "05:35",
+          zuhr: "13:45",
+          jumuah: "13:15",
+          asr: "16:45",
+          isha: "20:00"
+        }
+      },
+      {
+        id: "m2",
+        name: "Masjid-e-Bilal",
+        area: "Mumtaz Nagar",
+        lastUpdated: "03 Nov 2026",
+        times: {
+          fajr: "05:45",
+          zuhr: "13:45",
+          jumuah: "13:45",
+          asr: "17:10",
+          isha: "20:30"
+        }
+      },
+      {
+        id: "m3",
+        name: "Madina Masjid",
+        area: "Mumtaz Nagar",
+        lastUpdated: "01 Nov 2026",
+        times: {
+          fajr: "05:50",
+          zuhr: "14:00",
+          jumuah: "14:00",
+          asr: "17:15",
+          isha: "20:45"
+        }
+      },
+
+      // ---------------- AREA: KADRABAD ----------------
+      {
+        id: "m4",
+        name: "Jama Masjid Kadrabad",
+        area: "Kadrabad",
+        lastUpdated: "02 Nov 2026",
+        times: {
+          fajr: "05:30",
+          zuhr: "13:30",
+          jumuah: "13:15",
+          asr: "17:00",
+          isha: "20:15"
+        }
+      },
+      {
+        id: "m5",
+        name: "Masjid-e-Aqsa",
+        area: "Kadrabad",
+        lastUpdated: "03 Nov 2026",
+        times: {
+          fajr: "05:45",
+          zuhr: "13:50",
+          jumuah: "13:45",
+          asr: "17:15",
+          isha: "20:35"
+        }
+      },
+
+      // ---------------- AREA: STATION ROAD ----------------
+      {
+        id: "m6",
+        name: "Ek Minar Masjid",
+        area: "Station Road",
+        lastUpdated: "04 Nov 2026",
+        times: {
+          fajr: "05:40",
+          zuhr: "13:35",
+          jumuah: "13:30",
+          asr: "17:05",
+          isha: "20:20"
+        }
+      },
+      {
+        id: "m7",
+        name: "Markaz Masjid",
+        area: "Station Road",
+        lastUpdated: "04 Nov 2026",
+        times: {
+          fajr: "05:55",
+          zuhr: "14:15",
+          jumuah: "14:00",
+          asr: "17:20",
+          isha: "21:00"
+        }
+      },
+
+      // ---------------- AREA: AZAD COLONY ----------------
+      {
+        id: "m8",
+        name: "Masjid-e-Noor",
+        area: "Azad Colony",
+        lastUpdated: "01 Nov 2026",
+        times: {
+          fajr: "05:35",
+          zuhr: "13:30",
+          jumuah: "13:30",
+          asr: "17:00",
+          isha: "20:15"
+        }
+      },
+      {
+        id: "m9",
+        name: "Masjid-e-Umar",
+        area: "Azad Colony",
+        lastUpdated: "02 Nov 2026",
+        times: {
+          fajr: "05:50",
+          zuhr: "13:55",
+          jumuah: "13:50",
+          asr: "17:15",
+          isha: "20:40"
+        }
+      }
+    ];
+
+    /**
+     * ========================================================================
+     * 3. STATE & HELPER FUNCTIONS
+     * ========================================================================
+     */
+    let selectedArea = "";
+    let simulatedMinutes = null;
+    let simulatedFriday = null;
+    let showAllRemaining = false;
+
+    function getUniqueAreas() {
+      const areas = [];
+      MASJID_DATA.forEach(item => {
+        if (!areas.includes(item.area)) {
+          areas.push(item.area);
+        }
+      });
+      return areas;
+    }
+
+    function timeToMinutes(time24) {
+      if (!time24 || !time24.includes(":")) return 0;
+      const [h, m] = time24.split(":").map(Number);
+      return h * 60 + m;
+    }
+
+    function formatTo12Hour(time24) {
+      if (!time24 || !time24.includes(":")) return "--:--";
+      const [h, m] = time24.split(":").map(Number);
+      const period = h >= 12 ? "PM" : "AM";
+      const hour12 = h % 12 === 0 ? 12 : h % 12;
+      const paddedHour = String(hour12).padStart(2, "0");
+      const paddedMin = String(m).padStart(2, "0");
+      return `${paddedHour}:${paddedMin} ${period}`;
+    }
+
+    function formatRemainingDiff(diffMinutes) {
+      if (diffMinutes <= 0) return "Starting now";
+      if (diffMinutes < 60) return `In ${diffMinutes} min${diffMinutes === 1 ? "" : "s"}`;
+      const hrs = Math.floor(diffMinutes / 60);
+      const mins = diffMinutes % 60;
+      return mins > 0 ? `In ${hrs}h ${mins}m` : `In ${hrs}h`;
+    }
+
+    function getCurrentTimeContext() {
+      const now = new Date();
+      const isFriday = simulatedFriday !== null ? simulatedFriday : (now.getDay() === 5);
+
+      let currentMinutes;
+      let displayClockStr;
+
+      if (simulatedMinutes !== null) {
+        currentMinutes = simulatedMinutes;
+        const simH = Math.floor(currentMinutes / 60);
+        const simM = currentMinutes % 60;
+        const time24 = `${String(simH).padStart(2, "0")}:${String(simM).padStart(2, "0")}`;
+        displayClockStr = `${formatTo12Hour(time24)}`;
+      } else {
+        currentMinutes = now.getHours() * 60 + now.getMinutes();
+        displayClockStr = now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true
+        });
+      }
+
+      const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      const dayLabel = simulatedFriday === true
+        ? "Friday (Jumu'ah)"
+        : `${dayNames[now.getDay()]}${isFriday ? " (Jumu'ah)" : ""}`;
+
+      return { currentMinutes, isFriday, displayClockStr, dayLabel };
+    }
+
+    /**
+     * ========================================================================
+     * 4. SIMPLE NAMAZ DEFINITIONS & ONGOING CHECK
+     * ========================================================================
+     */
+    function buildSalahDefinitions(isFriday) {
+      return [
+        {
+          key: "fajr",
+          title: "Fajr",
+          subtitle: "Morning Namaz",
+          type: "masjid_list"
+        },
+        {
+          key: isFriday ? "jumuah" : "zuhr",
+          title: isFriday ? "Jumu'ah" : "Zuhr",
+          subtitle: isFriday ? "Friday Namaz" : "Afternoon Namaz",
+          type: "masjid_list"
+        },
+        {
+          key: "asr",
+          title: "Asr",
+          subtitle: "Late Afternoon Namaz",
+          type: "masjid_list"
+        },
+        {
+          key: "maghrib",
+          title: "Maghrib",
+          subtitle: "Evening Namaz (Same Time Everywhere)",
+          type: "single_maghrib"
+        },
+        {
+          key: "isha",
+          title: "Isha",
+          subtitle: "Night Namaz",
+          type: "masjid_list"
+        }
+      ];
+    }
+
+    function evaluateSalahCardStatus(salahDef, areaMasjids, currentMinutes) {
+      const lead = ADMIN_CONFIG.leadMinutesBeforeFirstJamaat;
+      const duration = ADMIN_CONFIG.jamaatDurationMinutes;
+
+      if (salahDef.type === "single_maghrib") {
+        const maghribMins = timeToMinutes(ADMIN_CONFIG.maghribTime24);
+        const windowStart = maghribMins - lead;
+        const windowEnd = maghribMins + duration;
+
+        const isOngoingWindow = currentMinutes >= windowStart && currentMinutes <= windowEnd;
+        const isAllDone = currentMinutes > windowEnd;
+
+        return {
+          isOngoingWindow,
+          isAllDone,
+          earliestMinutes: maghribMins,
+          latestMinutes: maghribMins,
+          nextCatchableMasjid: isAllDone ? null : { name: "All Masjids (Unified)", time24: ADMIN_CONFIG.maghribTime24, diff: maghribMins - currentMinutes },
+          remainingMasjidsCount: isAllDone ? 0 : 1
+        };
+      }
+
+      const sortedMasjids = [...areaMasjids].sort((a, b) => {
+        return timeToMinutes(a.times[salahDef.key]) - timeToMinutes(b.times[salahDef.key]);
+      });
+
+      if (sortedMasjids.length === 0) {
+        return {
+          isOngoingWindow: false,
+          isAllDone: false,
+          earliestMinutes: 0,
+          latestMinutes: 0,
+          nextCatchableMasjid: null,
+          remainingMasjidsCount: 0
+        };
+      }
+
+      const timesInMinutes = sortedMasjids.map(m => timeToMinutes(m.times[salahDef.key]));
+      const earliestMinutes = Math.min(...timesInMinutes);
+      const latestMinutes = Math.max(...timesInMinutes);
+
+      const windowStart = earliestMinutes - lead;
+      const windowEnd = latestMinutes + duration;
+
+      const isOngoingWindow = currentMinutes >= windowStart && currentMinutes <= windowEnd;
+      const isAllDone = currentMinutes > windowEnd;
+
+      // Find the next catchable Masjid in this area
+      const activeOrUpcomingMasjids = sortedMasjids.filter(m => {
+        const mMins = timeToMinutes(m.times[salahDef.key]);
+        return currentMinutes <= (mMins + duration);
+      });
+
+      let nextCatchableMasjid = null;
+      if (activeOrUpcomingMasjids.length > 0) {
+        const firstM = activeOrUpcomingMasjids[0];
+        const firstMins = timeToMinutes(firstM.times[salahDef.key]);
+        nextCatchableMasjid = {
+          name: firstM.name,
+          time24: firstM.times[salahDef.key],
+          diff: firstMins - currentMinutes
+        };
+      }
+
+      return {
+        isOngoingWindow,
+        isAllDone,
+        earliestMinutes,
+        latestMinutes,
+        nextCatchableMasjid,
+        remainingMasjidsCount: activeOrUpcomingMasjids.length
+      };
+    }
+
+    /**
+     * ========================================================================
+     * 5. UI RENDERING
+     * ========================================================================
+     */
+    function initAreaSelector() {
+      const selectEl = document.getElementById("areaSelect");
+      const areas = getUniqueAreas();
+
+      if (areas.length > 0 && !selectedArea) {
+        selectedArea = areas[0];
+      }
+
+      selectEl.innerHTML = areas.map(area => {
+        const count = MASJID_DATA.filter(m => m.area === area).length;
+        const isSelected = area === selectedArea ? "selected" : "";
+        return `<option value="${area}" class="bg-zinc-900 text-white" ${isSelected}>${area} (${count} Masjid${count > 1 ? 's' : ''})</option>`;
+      }).join("");
+    }
+
+    function handleAreaChange(newArea) {
+      selectedArea = newArea;
+      initAreaSelector();
+      renderApp();
+    }
+
+    function toggleRemainingSalah() {
+      showAllRemaining = !showAllRemaining;
+      renderApp();
+    }
+
+    function renderApp() {
+      const { currentMinutes, isFriday, displayClockStr, dayLabel } = getCurrentTimeContext();
+
+      // Update live header clocks (Desktop & Mobile)
+      const clockDesktop = document.getElementById("liveClock");
+      const dayDesktop = document.getElementById("liveDayBadge");
+      const clockMobile = document.getElementById("liveClockMobile");
+      const dayMobile = document.getElementById("liveDayBadgeMobile");
+
+      if (clockDesktop) clockDesktop.textContent = displayClockStr;
+      if (dayDesktop) dayDesktop.textContent = dayLabel;
+      if (clockMobile) clockMobile.textContent = displayClockStr;
+      if (dayMobile) dayMobile.textContent = dayLabel;
+
+      // Strictly filter Masjids for the selected area
+      const areaMasjids = MASJID_DATA.filter(m => m.area === selectedArea);
+
+      // Build the 5 Salah definitions
+      const salahDefs = buildSalahDefinitions(isFriday);
+
+      // Evaluate each of the 5 Salah cards
+      const evaluatedCards = salahDefs.map((def, originalIndex) => {
+        const status = evaluateSalahCardStatus(def, areaMasjids, currentMinutes);
+        return {
+          ...def,
+          originalIndex,
+          status
+        };
+      });
+
+      // Check if ANY Salah is currently in its Ongoing Masjid Jama'at window
+      const ongoingCard = evaluatedCards.find(c => c.status.isOngoingWindow);
+
+      // Find the next upcoming Salah today (if none is currently ongoing)
+      const nextUpcomingCard = evaluatedCards.find(c => !c.status.isAllDone && !c.status.isOngoingWindow);
+
+      // 1. RENDER TOP ONGOING SALAH SECTION (ONLY ONGOING SALAH SHOWN FIRST)
+      const ongoingContainerEl = document.getElementById("ongoingSectionContainer");
+      if (ongoingCard) {
+        const nextCatch = ongoingCard.status.nextCatchableMasjid;
+        const catchInfo = nextCatch
+          ? `Next Masjid you can catch: <strong class="text-white underline decoration-red-200">${nextCatch.name} at ${formatTo12Hour(nextCatch.time24)}</strong>`
+          : `Jama'at is currently in progress in ${selectedArea}`;
+
+        ongoingContainerEl.innerHTML = `
+          <div class="mb-3 flex flex-wrap items-center justify-between gap-2 bg-red-600 text-white px-4 py-2.5 rounded-xl shadow-sm">
+            <div class="flex items-center gap-2.5">
+              <span class="relative flex h-3 w-3 shrink-0">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-80"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+              </span>
+              <span class="text-xs sm:text-sm font-extrabold uppercase tracking-wider">
+                Ongoing Salah Right Now in ${selectedArea}
+              </span>
+            </div>
+            <span class="text-xs font-medium text-red-100">${catchInfo}</span>
+          </div>
+          ${renderSalahCardHTML(ongoingCard, areaMasjids, currentMinutes)}
+        `;
+      } else {
+        // When NO Masjid Jama'at is ongoing right now, show a clean status card
+        let nextHintHTML = `<p class="text-xs sm:text-sm text-zinc-600 mt-1">All Masjid Jama'ats for today are completed in <strong>${selectedArea}</strong>.</p>`;
+        if (nextUpcomingCard && nextUpcomingCard.status.nextCatchableMasjid) {
+          const earliest = nextUpcomingCard.status.nextCatchableMasjid;
+          nextHintHTML = `
+            <p class="text-xs sm:text-sm text-zinc-600 mt-1">
+              Next Masjid Jama'at in <strong>${selectedArea}</strong> is <strong class="text-emerald-700">${nextUpcomingCard.title}</strong> starting at <strong class="font-mono text-zinc-950">${formatTo12Hour(earliest.time24)}</strong> (${earliest.name}).
+            </p>
+          `;
+        }
+
+        ongoingContainerEl.innerHTML = `
+          <div class="bg-white border-2 border-zinc-900 rounded-2xl p-5 sm:p-6 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="flex items-start gap-3.5">
+              <div class="w-10 h-10 rounded-xl bg-zinc-100 border border-zinc-300 flex items-center justify-center shrink-0 mt-0.5">
+                <span class="w-3 h-3 rounded-full bg-zinc-400"></span>
+              </div>
+              <div>
+                <span class="inline-block text-[11px] font-extrabold uppercase tracking-wider bg-zinc-200 text-zinc-800 px-2.5 py-0.5 rounded-md">
+                  No Ongoing Jama'at Right Now
+                </span>
+                <h2 class="text-lg sm:text-xl font-extrabold text-zinc-950 mt-1.5">
+                  No Masjid prayer is active at this moment in ${selectedArea}
+                </h2>
+                ${nextHintHTML}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // 2. FILTER & RENDER REMAINING SALAH CARDS (EXCLUDING THE ONE ALREADY SHOWN AT TOP)
+      const remainingCards = evaluatedCards.filter(c => !c.status.isOngoingWindow);
+
+      const remainingTitleEl = document.getElementById("remainingSectionTitle");
+      const remainingSubEl = document.getElementById("remainingSectionSubtitle");
+      const toggleBtnTextEl = document.getElementById("toggleRemainingBtnText");
+      const toggleIconEl = document.getElementById("toggleRemainingIcon");
+      const containerEl = document.getElementById("salahCardsContainer");
+
+      remainingTitleEl.textContent = ongoingCard
+        ? `Other ${remainingCards.length} Salah Timings in ${selectedArea}`
+        : `All 5 Salah Timings in ${selectedArea}`;
+
+      remainingSubEl.textContent = showAllRemaining
+        ? `Showing all ${remainingCards.length} Salah schedules for ${selectedArea}`
+        : `Tap the button to see all remaining Masjid Jama'at timings in ${selectedArea}`;
+
+      toggleBtnTextEl.textContent = showAllRemaining
+        ? "Hide Remaining Salah"
+        : `See All Remaining Salah (${remainingCards.length})`;
+
+      if (showAllRemaining) {
+        toggleIconEl.classList.add("rotate-180");
+        containerEl.classList.remove("hidden");
+      } else {
+        toggleIconEl.classList.remove("rotate-180");
+        containerEl.classList.add("hidden");
+      }
+
+      containerEl.innerHTML = remainingCards.map(card => renderSalahCardHTML(card, areaMasjids, currentMinutes)).join("");
+    }
+
+    function renderSalahCardHTML(card, areaMasjids, currentMinutes) {
+      const { isOngoingWindow, isAllDone } = card.status;
+      const duration = ADMIN_CONFIG.jamaatDurationMinutes;
+
+      // Card styling: Red Ongoing Highlight when active; Green/Black/White when normal
+      const cardBorderClass = isOngoingWindow
+        ? "border-2 border-red-600 ongoing-card-highlight bg-white"
+        : "border-2 border-zinc-900 bg-white shadow-xs";
+
+      const headerBgClass = isOngoingWindow
+        ? "bg-zinc-950 text-white border-b-2 border-red-600"
+        : "bg-zinc-950 text-white border-b border-zinc-800";
+
+      // Simple status badge in the card header
+      let headerBadgeHTML = "";
+      if (isOngoingWindow) {
+        headerBadgeHTML = `
+          <span class="inline-flex items-center gap-2 bg-red-600 text-white text-xs font-extrabold uppercase tracking-wider px-3 py-1.5 rounded-lg">
+            <span class="relative flex h-2.5 w-2.5">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-80"></span>
+              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
+            </span>
+            Ongoing Now
+          </span>
+        `;
+      } else if (isAllDone) {
+        headerBadgeHTML = `
+          <span class="text-xs font-semibold text-zinc-400 bg-zinc-800 px-3 py-1 rounded-lg">
+            Done for Today
+          </span>
+        `;
+      } else {
+        headerBadgeHTML = `
+          <span class="text-xs font-bold text-emerald-300 bg-emerald-950 border border-emerald-700 px-3 py-1 rounded-lg">
+            Upcoming
+          </span>
+        `;
+      }
+
+      // 1. Special Case: MAGHRIB SINGLE CARD + NOTE
+      if (card.type === "single_maghrib") {
+        return `
+          <article class="rounded-2xl overflow-hidden transition-all ${cardBorderClass}">
+            <div class="px-5 py-3.5 flex flex-wrap items-center justify-between gap-3 ${headerBgClass}">
+              <div>
+                <div class="flex items-center gap-2">
+                  <h2 class="font-display text-xl sm:text-2xl font-extrabold text-white">${card.title}</h2>
+                  <span class="text-xs text-emerald-400 font-medium">&bull; ${card.subtitle}</span>
+                </div>
+              </div>
+              <div>${headerBadgeHTML}</div>
+            </div>
+
+            <div class="p-5">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-zinc-200">
+                <div>
+                  <span class="text-xs font-bold uppercase text-emerald-700">Jama'at Time in All Masjids</span>
+                  <div class="text-2xl sm:text-3xl font-mono font-extrabold text-zinc-950 mt-0.5">
+                    ${formatTo12Hour(ADMIN_CONFIG.maghribTime24)}
+                  </div>
+                </div>
+                <div class="text-xs text-zinc-500">
+                  Last Updated: <span class="font-semibold text-zinc-800">${ADMIN_CONFIG.maghribLastUpdated}</span>
+                </div>
+              </div>
+
+              <div class="mt-3.5 bg-emerald-50/70 border border-emerald-700/30 rounded-xl p-3.5 text-xs sm:text-sm text-zinc-800 leading-relaxed">
+                <strong>Important Note:</strong> ${ADMIN_CONFIG.maghribNote}
+              </div>
+            </div>
+          </article>
+        `;
+      }
+
+      // 2. Standard Case: MASJID LIST FOR SELECTED AREA (Sorted earliest to latest)
+      const sortedMasjids = [...areaMasjids].sort((a, b) => {
+        return timeToMinutes(a.times[card.key]) - timeToMinutes(b.times[card.key]);
+      });
+
+      const firstCatchableMasjid = sortedMasjids.find(m => {
+        const mMins = timeToMinutes(m.times[card.key]);
+        return currentMinutes <= (mMins + duration);
+      });
+
+      const rowsHTML = sortedMasjids.map((masjid, idx) => {
+        const time24 = masjid.times[card.key];
+        const mMins = timeToMinutes(time24);
+        const diff = mMins - currentMinutes;
+
+        const isMasjidDone = currentMinutes > (mMins + duration);
+        const isMasjidHappeningNow = currentMinutes >= mMins && currentMinutes <= (mMins + duration);
+        const isNextBestOption = firstCatchableMasjid && firstCatchableMasjid.id === masjid.id;
+
+        let statusTag = "";
+        let cardStyle = "border-zinc-200 bg-white";
+        let timePillStyle = "bg-zinc-950 text-white";
+
+        if (isOngoingWindow) {
+          if (isMasjidHappeningNow) {
+            cardStyle = "border-2 border-red-600 bg-red-50/40";
+            timePillStyle = "bg-red-600 text-white";
+            statusTag = `
+              <span class="inline-flex items-center gap-1.5 bg-red-600 text-white text-[11px] font-extrabold uppercase px-2.5 py-0.5 rounded-md">
+                <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+                Ongoing Now
+              </span>
+            `;
+          } else if (!isMasjidDone && diff > 0) {
+            cardStyle = isNextBestOption
+              ? "border-2 border-emerald-600 bg-emerald-50/30"
+              : "border-zinc-300 bg-white";
+            timePillStyle = "bg-emerald-700 text-white";
+            statusTag = `
+              <span class="inline-flex items-center gap-1 bg-emerald-600 text-white text-[11px] font-bold px-2.5 py-0.5 rounded-md">
+                ${isNextBestOption ? "Next Available &bull; " : ""}${formatRemainingDiff(diff)}
+              </span>
+            `;
+          } else if (isMasjidDone) {
+            cardStyle = "border-zinc-200 bg-zinc-100/80 opacity-60";
+            timePillStyle = "bg-zinc-200 text-zinc-600";
+            statusTag = `<span class="inline-block bg-zinc-200 text-zinc-600 text-[11px] font-semibold px-2 py-0.5 rounded">Finished</span>`;
+          }
+        } else {
+          if (isMasjidDone) {
+            cardStyle = "border-zinc-200 bg-zinc-50/80 opacity-75";
+            timePillStyle = "bg-zinc-200 text-zinc-700";
+          } else if (idx === 0 && sortedMasjids.length > 1) {
+            statusTag = `<span class="text-[11px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded">Earliest in Area</span>`;
+          } else if (idx === sortedMasjids.length - 1 && sortedMasjids.length > 1) {
+            statusTag = `<span class="text-[11px] font-bold text-zinc-700 bg-zinc-200 px-2 py-0.5 rounded">Last Jama'at in Area</span>`;
+          }
+        }
+
+        return `
+          <div class="border rounded-xl p-4 flex items-center justify-between gap-3 transition-all ${cardStyle}">
+            <div class="space-y-1 min-w-0">
+              <div class="flex flex-wrap items-center gap-2">
+                <h3 class="font-extrabold text-base sm:text-lg text-zinc-950 truncate">${masjid.name}</h3>
+                ${statusTag}
+              </div>
+              <div class="flex flex-wrap items-center gap-2 text-xs text-zinc-500">
+                <span class="font-semibold text-emerald-800">${masjid.area}</span>
+                <span>&bull;</span>
+                <span>Updated: ${masjid.lastUpdated}</span>
+              </div>
+            </div>
+
+            <div class="shrink-0 text-right">
+              <div class="font-mono text-base sm:text-xl font-extrabold px-3.5 py-2 rounded-xl tracking-tight ${timePillStyle}">
+                ${formatTo12Hour(time24)}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      return `
+        <article class="rounded-2xl overflow-hidden transition-all ${cardBorderClass}">
+          <div class="px-5 py-3.5 flex flex-wrap items-center justify-between gap-3 ${headerBgClass}">
+            <div class="flex items-center gap-2">
+              <h2 class="font-display text-xl sm:text-2xl font-extrabold text-white">${card.title}</h2>
+              <span class="text-xs text-emerald-400 font-medium">&bull; ${card.subtitle}</span>
+            </div>
+            <div>${headerBadgeHTML}</div>
+          </div>
+
+          <div class="p-4 sm:p-5 grid grid-cols-1 md:grid-cols-2 gap-3">
+            ${rowsHTML}
+          </div>
+        </article>
+      `;
+    }
+
+    /**
+     * ========================================================================
+     * 6. MODAL & SIMULATION HANDLERS
+     * ========================================================================
+     */
+    function openSuggestModal() {
+      const modal = document.getElementById("suggestModal");
+      const areaInput = document.getElementById("editAreaName");
+      if (areaInput && !areaInput.value) {
+        areaInput.value = selectedArea;
+      }
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function closeSuggestModal() {
+      const modal = document.getElementById("suggestModal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+
+    function submitEditSuggestion(e) {
+      e.preventDefault();
+      const masjid = document.getElementById("editMasjidName").value.trim();
+      const area = document.getElementById("editAreaName").value.trim();
+      const details = document.getElementById("editDetails").value.trim();
+
+      const subject = encodeURIComponent(`Next Salah Time Update - ${masjid} (${area})`);
+      const body = encodeURIComponent(
+        `Assalamu Alaikum,\n\nPlease update the following Masjid timing for Parbhani:\n\n` +
+        `Masjid Name: ${masjid}\n` +
+        `Area: ${area}\n` +
+        `Correction / New Timing:\n${details}\n\n` +
+        `JazakAllah Khair`
+      );
+
+      window.location.href = `mailto:${ADMIN_CONFIG.contactEmail}?subject=${subject}&body=${body}`;
+      closeSuggestModal();
+    }
+
+    function quickSimulate(time24, isFri) {
+      simulatedMinutes = timeToMinutes(time24);
+      simulatedFriday = isFri ? true : false;
+      renderApp();
+    }
+
+    function resetSimulation() {
+      simulatedMinutes = null;
+      simulatedFriday = null;
+      renderApp();
+    }
+
+    // Initialize and refresh clock every second
+    window.onload = function () {
+      initAreaSelector();
+      renderApp();
+      setInterval(() => {
+        if (simulatedMinutes === null) {
+          renderApp();
+        }
+      }, 1000);
+    };
+  </script>
+</body>
+</html>
